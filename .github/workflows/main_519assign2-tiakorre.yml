@@ -41,4 +41,4 @@ jobs:
           app-name: '519assign2-tiakorre'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E2FA34F17B9A456DB2DF08BA6AF86400 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_93CA45C1D6FA48069BB95F6AC629D793 }}
