@@ -1,0 +1,34 @@
+name: Deploy API2 to Azure Container App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to Azure Container Registry
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t my-container-app:latest ./Node/API2
+          docker tag my-container-app:latest container1tiakorre.azurecr.io/my-container-app:latest
+          docker push container1tiakorre.azurecr.io/my-container-app:latest
+
+      - name: Deploy to Azure Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}/Node/API2
+          acrName: container1tiakorre
+          containerAppName: container1-tiakorre
+          resourceGroup: assignment1-tiakorre
+
