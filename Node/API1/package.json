@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "519assign2-tiakorre",
   "version": "1.0.0",
-  "description": "",
+  "description": "Azure function app",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -13,7 +13,7 @@
   "devDependencies": {
     "@azure/functions": "^3.0.0",
     "azure-functions-core-tools": "^4.x",
-    "@types/node": "16.x",
+    "@types/node": "18.x",
     "typescript": "^4.0.0"
   }
 }
