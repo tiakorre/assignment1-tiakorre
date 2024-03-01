@@ -21,14 +21,13 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build -t my-container-app:latest ./Node/API2
-          docker tag my-container-app:latest container1tiakorre.azurecr.io/my-container-app:latest
-          docker push container1tiakorre.azurecr.io/my-container-app:latest
+          docker tag my-container-app:latest assignment2tiakorre.azurecr.io/my-container-app:latest
+          docker push assignment2tiakorre.azurecr.io/my-container-app:latest
 
       - name: Deploy to Azure Container App
         uses: azure/container-apps-deploy-action@v1
         with:
           appSourcePath: ${{ github.workspace }}/Node/API2
-          acrName: container1tiakorre
+          acrName: assignment2tiakorre
           containerAppName: container1-tiakorre
           resourceGroup: assignment1-tiakorre
-
