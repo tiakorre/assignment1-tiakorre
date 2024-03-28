@@ -5,7 +5,7 @@
       "type": "queueTrigger",
       "direction": "in",
       "queueName": "js-queue-items",
-      "connection": ""
+      "connection": "DefaultEndpointsProtocol=https;AccountName=assignment1tiakorre928f;AccountKey=NAMk6YUQyEHLdyWXIqce91SdRxaj5Ir9OFimbRIhTYsF/laJrpoe0vq6pv4AYzwxpHbQE0Ikn+QA+ASt2AqbtA==;EndpointSuffix=core.windows.net"
     }
   ]
 }
