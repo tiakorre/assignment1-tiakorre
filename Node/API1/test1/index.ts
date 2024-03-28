@@ -1,21 +1,30 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-// const name = (req.query.name || (req.body && req.body.name));
-// const responseMessage = name
-//     ? "Hello, " + name + ". This HTTP triggered function executed successfully."
-//     : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
+import { AzureFunction, Context, HttpRequest } from "@azure/functions";
+
+import { DefaultAzureCredential, SecretClient } from "@azure/identity";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
-    const currentDate = new Date().toLocaleDateString();
-    const responseMessage = currentDate
-        ? "Today's date is: " + currentDate + "."
-        : "Unable to retrieve today's date.";
+    const credential = new DefaultAzureCredential();
+    const vaultUrl = "https://tiakorrekv.vault.azure.net/";
 
-    context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: responseMessage
-    };
+    const secretClient = new SecretClient(vaultUrl, credential);
 
+    try {
+     
+        const secretName = "secret2"; // Replace with the name of your secret
+        const secretValue = await secretClient.getSecret(secretName);
+        context.log('Retrieved secret value:', secretValue.value);    
+        const responseMessage = `Today's date is: ${new Date().toLocaleDateString()}. Secret value retrieved from Key Vault: ${secretValue.value}`;
+        context.res = {
+            body: responseMessage
+        };
+    } catch (error) {
+        context.log.error("Error retrieving secret:", error.message);
+        context.res = {
+            status: 500,
+            body: "Internal Server Error"
+        };
+    }
 };
 
 export default httpTrigger;
