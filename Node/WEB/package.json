@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "@azure/keyvault-secrets": "^4.0.0",
+    "@azure/identity": "^1.4.0"
   }
 }
