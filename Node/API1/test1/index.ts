@@ -1,5 +1,4 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
-
 import { DefaultAzureCredential, SecretClient } from "@azure/identity";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
@@ -10,10 +9,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     const secretClient = new SecretClient(vaultUrl, credential);
 
     try {
-     
         const secretName = "secret2"; // Replace with the name of your secret
         const secretValue = await secretClient.getSecret(secretName);
-        context.log('Retrieved secret value:', secretValue.value);    
+        context.log('Retrieved secret value:', secretValue.value);
         const responseMessage = `Today's date is: ${new Date().toLocaleDateString()}. Secret value retrieved from Key Vault: ${secretValue.value}`;
         context.res = {
             body: responseMessage
