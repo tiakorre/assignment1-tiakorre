@@ -1,16 +1,16 @@
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
 const { DefaultAzureCredential, SecretClient } = require("@azure/keyvault-secrets");
 
- 
+const app = express();
+const port = process.env.PORT || 3000;
+
 const credential = new DefaultAzureCredential();
-const vaultUrl = "https://tiakorrekv.vault.azure.net/"; 
+const vaultUrl = "https://tiakorrekv.vault.azure.net/";
 const secretName = "secret1";
 
 const secretClient = new SecretClient(vaultUrl, credential);
 
-app.use('/', express.static('frontend/build'));
+app.use(express.static('public'));
 
 app.get('/api', async (req, res) => {
   try {
